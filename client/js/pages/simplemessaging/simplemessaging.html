@@ -1,0 +1,25 @@
+<div class="well">
+    <div class="row">
+        <div class="col-md-5">
+            <h2>I am <small><span ng-bind="user.easyRtcId"></span></small></h2>
+            <form ng-submit="sendAll()">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="myText" placeholder="Enter your message" ng-model="chat.msg">
+                    <span class="input-group-btn">
+                        <button class="btn btn-success" ng-click="sendAll()" type="button">Send to <b>all</b></button>
+                    </span>
+                </div>
+            </form>
+            <h4>List of users</h4>
+            <div ng-repeat="user in users">
+                <button class="btn btn-primary" ng-click="sendTo(user.easyRtcId)">
+                    Send to <b><span ng-bind="user.name"></span></b>
+                </button>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <h2>Chat box</h2>
+            <div style="height: 300px; border: solid 1px gray; overflow-y: scroll;" ng-bind-html="chat.allMsgs"></div>
+        </div>
+    </div>
+</div>
