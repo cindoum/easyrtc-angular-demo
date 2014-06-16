@@ -1,4 +1,4 @@
-angular.module('cam').controller('simpleMessagingCtrl', ['$scope', '$timeout', function ($scope) {
+angular.module('cam').controller('simpleMessagingCtrl', ['$scope', '$filter', function ($scope, $filter) {
     var _init = function () {
         $scope.user = {};
         $scope.users = [];
@@ -37,7 +37,7 @@ angular.module('cam').controller('simpleMessagingCtrl', ['$scope', '$timeout', f
     var _addToConversation = function (who, msgType, content) {
         setTimeout(function() {
             $scope.$apply(function () {
-                $scope.chat.allMsgs += "<b>" + who + ":</b>&nbsp;" + content + "<br />"; 
+                $scope.chat.allMsgs += "<b>" + who + " </b> <span class=\"chat_timespan\">[<i>" + $filter('date')(new Date(), 'H:mm ss') + "</i>]</span> : &nbsp;" + content + "<br />"; 
             }, 0);            
         });
     };

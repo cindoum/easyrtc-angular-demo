@@ -2,7 +2,7 @@ angular.module('cam', ['ngRoute', 'ngSanitize'])
     .config(['$routeProvider', function ($routeProvider) {
          $routeProvider
             .when('/simplemessaging', {
-                templateUrl: 'js//pages/simplemessaging/simplemessaging.html',
+                templateUrl: 'js/pages/simplemessaging/simplemessaging.html',
                 controller: 'simpleMessagingCtrl'
             })
     }])
