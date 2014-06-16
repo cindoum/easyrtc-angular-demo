@@ -1,0 +1,22 @@
+<h1>Channel messaging</h1>
+<div class="well">
+    <div class="row">
+        <div class="col-md-5">
+            <h2>I am <small><span ng-bind="user.easyRtcId"></span></small></h2>
+            <div class="form-group">
+                <input type="text" class="form-control" id="myText" placeholder="Enter your message" ng-model="chat.msg">
+            </div>
+            <h4>List of users</h4>
+            <div ng-repeat="user in users">
+                <span ng-bind="user.name"></span>
+                <button class="btn btn-link" ng-show="user.isConnected!=true" ng-click="connect(user.easyRtcId)">Connect</button>
+                <button class="btn btn-link" ng-show="user.isConnected==true" ng-click="disconnect(user.easyRtcId)">Disconnect</button>
+                <button class="btn btn-primary" ng-if="user.isConnected==true" ng-click="sendTo(user.easyRtcId)">Send</button>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <h2>Chat box</h2>
+            <div style="height: 300px; border: solid 1px gray; overflow-y: scroll; padding: 10px; background-color: white" ng-bind-html="chat.allMsgs"></div>
+        </div>
+    </div>
+</div>
