@@ -1,0 +1,22 @@
+<h1>Audio video simple</h1>
+<h2>I am <small><span ng-bind="user.easyRtcId"></span></small></h2>
+<div class="well">
+    <div class="row">
+        <h4>List of users</h4>
+        <div ng-repeat="user in users">
+            <span ng-bind="user.name"></span>
+            <button class="btn btn-link" ng-show="user.isConnected!=true" ng-click="call(user.easyRtcId)">Connect</button>
+            <button class="btn btn-link" ng-show="user.isConnected==true" ng-click="hangup(user.easyRtcId)">Disconnect</button>
+        </div>
+    </div>
+</div>
+<div class="well">
+    <div class="row">
+        <div class="col-md-5">
+            <video autoplay="autoplay" class="easyrtcMirror" id="selfVideo" muted="muted" volume="0" ></video>
+        </div>
+        <div class="col-md-5 col-md-offset-2">
+            <video autoplay="autoplay" id="callerVideo" class="pull-right"></video>
+        </div>
+    </div>
+</div>

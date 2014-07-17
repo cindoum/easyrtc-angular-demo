@@ -7,13 +7,10 @@ angular.module('cam').controller('simpleMessagingCtrl', ['$scope', '$filter', fu
         easyrtc.setPeerListener(_addToConversation);
         easyrtc.setRoomOccupantListener(_convertListToButtons);
         easyrtc.connect("easyrtc.instantMessaging", _loginSuccess, _loginFailure);  
-        easyrtc.webSocket.on('test', function (resp) {
-            _addToConversation(resp.from + " (TO ALL)", "message", resp.msg);
-        });
     };
     
     $scope.sendAll = function () {
-        easyrtc.webSocket.emit('test', { msg: $scope.chat.msg, from: $scope.user.easyRtcId });
+        easyrtc.sendDataWS({ targetRoom: 'default' }, "message", { msg: $scope.chat.msg, from: $scope.user.easyRtcId });
         _addToConversation("Me (TO ALL)", "message", $scope.chat.msg);
         $scope.chat.msg = ''; 
     };
@@ -37,6 +34,11 @@ angular.module('cam').controller('simpleMessagingCtrl', ['$scope', '$filter', fu
     var _addToConversation = function (who, msgType, content) {
         setTimeout(function() {
             $scope.$apply(function () {
+                if (angular.isObject(content)) {
+                    who = content.from;
+                    content = content.msg;
+                }
+                
                 $scope.chat.allMsgs += "<b>" + who + " </b> <span class=\"chat_timespan\">[<i>" + $filter('date')(new Date(), 'H:mm ss') + "</i>]</span> : &nbsp;" + content + "<br />"; 
             }, 0);            
         });
